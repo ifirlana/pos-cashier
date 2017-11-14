@@ -1,4 +1,9 @@
 # pos-cashier
-pos
+getting started
 
-`npm start`
+``firebase ``
+
+
+``cd pos``
+
+``ng serve``

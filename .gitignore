@@ -8,3 +8,4 @@ npm-debug.log
 .img_banner_home.jpg.icloud
 .firebaserc
 node_modules/
+firebase-debug.log

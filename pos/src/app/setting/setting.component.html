@@ -1,0 +1,13 @@
+<p>
+  setting works!
+</p>
+<table>
+  <tr>
+    <th>id</th>
+    <th>name</th>
+  </tr>
+  <tr  *ngFor="let side of sidebar">
+    <td>{{side.id}}</td>
+    <td>{{side.title.rendered}}</td>
+  </tr>
+</table>

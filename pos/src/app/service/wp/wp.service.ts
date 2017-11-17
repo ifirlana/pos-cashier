@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs/Observable";
-import { Observer } from "rxjs/Observer";
-import {WpModel} from "./wp.model";
+import * as env from '../../../environments/environment';
+
 
 @Injectable()
 export class WpService {
 
-  protected firlana_com = "https://firlana.com/wp-json/wp/v2/posts";
+  protected firlana_com: string;
 
   Response: { body: object};
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.firlana_com  = env.environment.wp_url+"/wp-json/wp/v2";
+  }
 
   getSidebar(){
-      this.http
-        .get("https://firlana.com/wp-json/wp/v2/posts")
-        .subscribe((resp:Response) => {
-        console.log("resp:", resp.body);
-        return resp.body;
-      });
+      return this.http.get(this.firlana_com+"/"+env.environment.wp_sidebar);
   }
 
 }

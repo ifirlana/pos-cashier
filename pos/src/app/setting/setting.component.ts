@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { WpService } from '../service/wp/wp.service';
 import { WpModel } from '../service/wp/wp.model';
-import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-setting',
@@ -12,22 +11,14 @@ import {Observable} from "rxjs/Observable";
 })
 export class SettingComponent implements OnInit {
 
-  sidebar: WpModel[];
 
-  constructor(private wp: WpService) { }
+
+  constructor() { }
 
   ngOnInit() {
-   this.loadWp()
+
   }
 
-  loadWp() {
-    this.wp.getSidebar()
-      .(
-        (isian) => {
-          console.log("isian:", isian);
-          this.sidebar = isian;
-        });
-    console.log("sidebar:", this.sidebar);
-  }
+
 
 }

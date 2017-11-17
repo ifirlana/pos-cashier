@@ -4,5 +4,8 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // wp_url: "https://firlana.com"
+  wp_url: "http://localhost/wp",
+  wp_sidebar: "sidebar"
 };

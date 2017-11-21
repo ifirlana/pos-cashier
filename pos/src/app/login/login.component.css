@@ -1,0 +1,8 @@
+.example-card {
+  width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://drive.google.com/uc?id=13mM1DSmGZjAHc_kRM1G2l1HxPld0omvS');
+  background-size: cover;
+}

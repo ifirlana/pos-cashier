@@ -1,0 +1,11 @@
+<h1>Input Your Access:</h1>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput [(ngModel)]="username" [ngModelOptions]="{standalone: true}" placeholder="Username">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" placeholder="Password">
+  </mat-form-field>
+    <button mat-button mat-raised-button (click)="OK()">Ok</button>
+</form>

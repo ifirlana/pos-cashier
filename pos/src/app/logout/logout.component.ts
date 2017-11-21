@@ -1,5 +1,6 @@
 import { Component, OnInit, DoCheck, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import {StoreService} from "../service/cookies/store.service";
 
 @Component({
   selector: 'app-logout',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LogoutComponent implements OnInit, DoCheck {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private store: StoreService) { }
 
   ngOnInit() {
     console.log(":ngOnInit")
@@ -33,11 +34,13 @@ export class LogoutComponent implements OnInit, DoCheck {
 
   ngAfterViewChecked() {
     console.log(":ngAfterViewChecked");
-    setTimeout(() =>
-      {
-        // this.router.navigate(['/']);
-        window.location.href = "/";
-      },
-      3000);
+    this.store.destroyAll().subscribe(() => {
+      setTimeout(() =>
+        {
+          // this.router.navigate(['/']);
+          window.location.href = "/";
+        },
+        2000);
+    });
   }
 }

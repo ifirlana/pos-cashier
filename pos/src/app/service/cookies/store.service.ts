@@ -12,15 +12,22 @@ export class StoreService {
     this.cookieValue = this.cookieService.get(this.AuthKey);
   }
 
-  onSave(Auth: string): Observable {
+  onSave(Auth: string): Observable<any> {
     return Observable.create((observer) => {
       this.cookieService.set( this.AuthKey, Auth);
       this.cookieValue = this.cookieService.get(this.AuthKey);
-      observer.next();
+      observer.next(true);
     });
   }
 
   getAuth(): string {
-    return this.cookieValue;
+    return "Basic "+this.cookieService.get(this.AuthKey);
+  }
+
+  destroyAll(): Observable<any> {
+    return Observable.create((observer) => {
+      this.cookieService.deleteAll();
+      observer.next(true);
+    })
   }
 }

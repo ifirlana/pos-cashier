@@ -10,6 +10,9 @@ export class WpModel {
   title: {
     rendered: string
   };
+  content: {
+    rendered: string
+  };
 
   constructor(id: string, title: any, slug:string) {
     this.id = id;

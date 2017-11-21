@@ -6,6 +6,5 @@
 export const environment = {
   production: false,
   // wp_url: "https://firlana.com"
-  wp_url: "http://localhost/wp",
-  wp_sidebar: "sidebar"
+  wp_url: "http://localhost/wp/wp-json/wp/v2",
 };

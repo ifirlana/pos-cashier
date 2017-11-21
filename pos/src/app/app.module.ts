@@ -12,6 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 //Service
@@ -27,6 +28,8 @@ import { HomeComponent } from './home/home.component';
 import { SettingComponent } from './setting/setting.component';
 import { LogoutComponent } from './logout/logout.component';
 import { LoginComponent, LoginComponentDialog } from './login/login.component';
+import { ChairsComponent, ChairsComponentDialog, ChairsComponentAddDialog } from './chairs/chairs.component';
+import { RedirectBlankComponent } from './redirect-blank/redirect-blank.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,10 @@ import { LoginComponent, LoginComponentDialog } from './login/login.component';
     LogoutComponent,
     LoginComponent,
     LoginComponentDialog,
+    ChairsComponent,
+    ChairsComponentDialog,
+    ChairsComponentAddDialog,
+    RedirectBlankComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,8 +59,9 @@ import { LoginComponent, LoginComponentDialog } from './login/login.component';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    MatGridListModule,
   ],
-  entryComponents: [LoginComponentDialog],
+  entryComponents: [LoginComponentDialog, ChairsComponentDialog, ChairsComponentAddDialog],
   providers: [WpService, StoreService, CookieService],
   bootstrap: [AppComponent]
 })

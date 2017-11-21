@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { SettingComponent } from './setting/setting.component';
 import { LogoutComponent } from "./logout/logout.component";
 import { LoginComponent } from './login/login.component';
+import { ChairsComponent } from "./chairs/chairs.component";
+import { RedirectBlankComponent } from "./redirect-blank/redirect-blank.component"
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -13,9 +15,12 @@ const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'home', component: HomeComponent },
     { path: 'setting', component: SettingComponent },
+    { path: 'chairs', component: ChairsComponent },
   ]},
+  { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent},
-  { path: 'login', component: LoginComponent }
+  { path: 'blank', component: RedirectBlankComponent },
+  { path: '**', component: LogoutComponent},
 ];
 
 

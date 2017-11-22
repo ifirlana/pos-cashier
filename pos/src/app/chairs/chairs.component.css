@@ -1,2 +1,8 @@
 mat-card {
 }
+.float-me {
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  bottom: 10%;
+}

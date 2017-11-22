@@ -1,6 +1,6 @@
 <p>List chair you view</p>
 <br />
-<div>
+<div class="float-me">
   <button mat-mini-fab color="primary" (click)="openAddDialog()">+</button>
 </div>
 <div *ngIf="message" style="color: red;">Please wait..</div>
@@ -12,7 +12,8 @@
         {{chair.title.rendered}}
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="default" (click)="openDialog(chair.id)">View</button>
+        <button mat-button color="default" (click)="openDialog(chair.id)">View</button>
+        <button mat-button color="warn" (click)="openEditDialog(chair.id)">Edit</button>
       </mat-card-actions>
     </mat-card>
     <br>

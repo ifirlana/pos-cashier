@@ -28,8 +28,9 @@ import { HomeComponent } from './home/home.component';
 import { SettingComponent } from './setting/setting.component';
 import { LogoutComponent } from './logout/logout.component';
 import { LoginComponent, LoginComponentDialog } from './login/login.component';
-import { ChairsComponent, ChairsComponentDialog, ChairsComponentAddDialog } from './chairs/chairs.component';
+import { ChairsComponent, ChairsComponentDialog, ChairsComponentAddDialog, ChairsComponentEditDialog } from './chairs/chairs.component';
 import { RedirectBlankComponent } from './redirect-blank/redirect-blank.component';
+import { CommonComponent, CommonComponentConfirmDialog } from './common/common.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,10 @@ import { RedirectBlankComponent } from './redirect-blank/redirect-blank.componen
     ChairsComponent,
     ChairsComponentDialog,
     ChairsComponentAddDialog,
+    ChairsComponentEditDialog,
     RedirectBlankComponent,
+    CommonComponent,
+    CommonComponentConfirmDialog,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,13 @@ import { RedirectBlankComponent } from './redirect-blank/redirect-blank.componen
     ReactiveFormsModule,
     MatGridListModule,
   ],
-  entryComponents: [LoginComponentDialog, ChairsComponentDialog, ChairsComponentAddDialog],
+  entryComponents: [
+    LoginComponentDialog,
+    ChairsComponentDialog,
+    ChairsComponentAddDialog,
+    ChairsComponentEditDialog,
+    CommonComponentConfirmDialog,
+  ],
   providers: [WpService, StoreService, CookieService],
   bootstrap: [AppComponent]
 })

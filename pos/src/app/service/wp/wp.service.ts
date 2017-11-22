@@ -41,8 +41,21 @@ export class WpService {
 
   // create data
   postChair(data: object): Observable<any> {
-    this.httpHeaders.set("Content-type", "");
     return this.http.post(this.firlana_com+"/"+this.wp.wp_chairs, data, {
+      headers: this.httpHeaders,
+    });
+  }
+
+  // update data
+  updateChair(data: object, id: string): Observable<any> {
+    return this.http.post(this.firlana_com+"/"+this.wp.wp_chairs+"/"+id, data, {
+      headers: this.httpHeaders,
+    })
+  }
+
+  // delete data
+  deleteChair(id: string): Observable<any> {
+    return this.http.delete(this.firlana_com+"/"+this.wp.wp_chairs+"/"+id, {
       headers: this.httpHeaders,
     });
   }

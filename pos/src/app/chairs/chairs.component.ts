@@ -184,7 +184,15 @@ export class ChairsComponentEditDialog {
     this.dialogRef.close(false);
   }
 
-  onUpdate(): void {}
+  onUpdate(): void {
+    this.wp.updateChair({
+      'title': this.chair.title.rendered,
+      'content': this.chair.content.rendered,
+    }, this.id)
+      .subscribe(() => {
+        this.dialogRef.close(true);
+      })
+  }
   onDelete(): void {
     let dialog_confirm = this.dialog.open(CommonComponentConfirmDialog);
 

@@ -1,4 +1,6 @@
-<h1>Input Your Access:</h1>
+
+<h1 *ngIf="title">{{title}}</h1>
+<h2>Input Your Access:</h2>
 <form class="example-form">
   <mat-form-field class="example-full-width">
     <input matInput [(ngModel)]="username" [ngModelOptions]="{standalone: true}" placeholder="Username">

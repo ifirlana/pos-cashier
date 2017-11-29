@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { StoreService } from '../service/cookies/store.service';
 import {Route, Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
+import {LaraService} from "../service/laravel/lara.service";
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,15 @@ export class LoginComponent implements OnInit {
         console.log('The dialog was closed');
       });
   }
+
+  openDialogLaravel(): void {
+    let dialogRef = this.dialog.open(LoginDialogComponentDialog);
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        console.log('The dialog was closed');
+      });
+  };
 
 
 }
@@ -57,6 +67,44 @@ export class LoginComponentDialog {
         console.log(":store:Success!");
         this.dialogRef.close();
         this.router.navigate(["dashboard"], {skipLocationChange: true})
+      })
+  }
+
+}
+
+@Component({
+  selector: 'app-login-dialog-custom',
+  templateUrl: 'form/dialog.html',
+  styleUrls: ['form/dialog.css'],
+})
+export class LoginDialogComponentDialog {
+
+  username: string;
+  password: string;
+  title: string;
+
+  constructor(
+    public dialogRef: MatDialogRef<LoginDialogComponentDialog>,
+    private store: StoreService,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private laraService: LaraService,
+  ) {
+    this.title = "Laravel login";
+    this.username = "test@gmail.com";
+    this.password = "password";
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  OK(): void {
+    this.laraService.createToken(this.username, this.password)
+      .subscribe((response: Response) => {
+        console.log(":token");
+        console.log(response);
+        this.dialogRef.close();
       })
   }
 

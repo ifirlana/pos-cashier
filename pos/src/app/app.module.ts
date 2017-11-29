@@ -18,6 +18,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 //Service
 import { WpService } from './service/wp/wp.service';
 import {StoreService} from "./service/cookies/store.service";
+import { LaraService } from './service/laravel/lara.service';
 import {CookieService} from "ngx-cookie-service";
 
 // Component
@@ -27,7 +28,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { SettingComponent } from './setting/setting.component';
 import { LogoutComponent } from './logout/logout.component';
-import { LoginComponent, LoginComponentDialog } from './login/login.component';
+import { LoginComponent, LoginComponentDialog, LoginDialogComponentDialog } from './login/login.component';
 import { ChairsComponent, ChairsComponentDialog, ChairsComponentAddDialog, ChairsComponentEditDialog } from './chairs/chairs.component';
 import { RedirectBlankComponent } from './redirect-blank/redirect-blank.component';
 import { CommonComponent, CommonComponentConfirmDialog } from './common/common.component';
@@ -41,6 +42,7 @@ import { CommonComponent, CommonComponentConfirmDialog } from './common/common.c
     LogoutComponent,
     LoginComponent,
     LoginComponentDialog,
+    LoginDialogComponentDialog,
     ChairsComponent,
     ChairsComponentDialog,
     ChairsComponentAddDialog,
@@ -67,12 +69,13 @@ import { CommonComponent, CommonComponentConfirmDialog } from './common/common.c
   ],
   entryComponents: [
     LoginComponentDialog,
+    LoginDialogComponentDialog,
     ChairsComponentDialog,
     ChairsComponentAddDialog,
     ChairsComponentEditDialog,
     CommonComponentConfirmDialog,
   ],
-  providers: [WpService, StoreService, CookieService],
+  providers: [WpService, StoreService, CookieService, LaraService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

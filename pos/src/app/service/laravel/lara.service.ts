@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import * as env from '../../../environments/environment';
 import {Observable} from "rxjs/Observable";
 import {StoreService} from "../cookies/store.service";
+import {SidebarModel} from "./sidebar.model";
+import {HttpObserve} from "@angular/common/http/src/client";
 
 @Injectable()
 export class LaraService {
@@ -11,7 +13,7 @@ export class LaraService {
   oauth_token: string;
   sidebar: string;
 
-  headers:any;
+  headers: HttpHeaders;
 
   constructor(
     private http: HttpClient,
@@ -22,10 +24,6 @@ export class LaraService {
     this.oauth_token = this.lara+"/oauth/token/";
     this.sidebar = this.lara + "/api/sidebar/";
 
-    // set headers with token
-    let httpHeaders = new HttpHeaders();
-    let auth = store.getLaraAuth();
-    this.headers = httpHeaders.append('Authorization', auth);
   }
 
   createToken(username: string, password: string, client_id = 2, client_secret = "p7uJZ9D5C57RmeBneJ56zHPN60rSskl3LHjVy6Ed", grant_type = "password", ): Observable<any> {
@@ -38,10 +36,19 @@ export class LaraService {
     });
   }
 
+  // set headers
+  loadHeader():HttpHeaders {
+    let httpHeaders = new HttpHeaders();
+    let auth = this.store.getLaraAuth();
+    this.headers = httpHeaders.append('Authorization', auth);
+    return this.headers;
+  }
+
+  // return navbar
   getSidebar(): Observable<any> {
 
-    return this.http.get(this.sidebar, {
-      headers: this.headers,
+    return this.http.get<SidebarModel>(this.sidebar, {
+      headers: this.loadHeader()
     })
   }
 }

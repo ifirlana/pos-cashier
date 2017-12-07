@@ -1,9 +1,23 @@
 # pos-cashier
 getting started
 
-``firebase ``
+installation
 
+``npm install -g electron``
+
+``npm install -g firebase``
+
+development
+
+``firebase ``
 
 ``cd pos``
 
 ``ng serve``
+
+
+electron
+
+``cd pos``
+
+``electron .``

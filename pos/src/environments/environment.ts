@@ -7,6 +7,6 @@ export const environment = {
   production: false,
   // wp_url: "https://firlana.com"
   wp_url: "http://localhost/wp/wp-json/wp/v2",
-  lara_url: "http://localhost:8000",
+  lara_url: "http://127.0.0.1:8000",
 
 };

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { StoreService } from '../service/cookies/store.service';
 import {Route, Router} from "@angular/router";
-import {Observable} from "rxjs/Observable";
 import {LaraService} from "../service/laravel/lara.service";
 import {TokenModel} from "../service/laravel/token.model";
 
@@ -14,6 +13,8 @@ import {TokenModel} from "../service/laravel/token.model";
 })
 export class LoginComponent implements OnInit {
 
+  message:string;
+
   constructor(
     public dialog: MatDialog,
     private router: Router
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   openDialog(): void {
+    this.message = "";
     let dialogRef = this.dialog.open(LoginComponentDialog);
 
     dialogRef.afterClosed()
@@ -30,12 +32,14 @@ export class LoginComponent implements OnInit {
         console.log('The dialog was closed');
         console.log(result);
         if (result === true) {
-          this.router.navigate(["dashboard"], {skipLocationChange: true})
+          this.router.navigate(["blank"], {queryParams: {redirect:"dashboard"}});
+          this.message = "Something wrong! try again";
         }
       });
   }
 
   openDialogLaravel(): void {
+    this.message = "";
     let dialogRef = this.dialog.open(LoginDialogComponentDialog);
 
     dialogRef.afterClosed()
@@ -43,7 +47,9 @@ export class LoginComponent implements OnInit {
         console.log('The dialog was closed');
         console.log(result);
         if (result === true) {
-          this.router.navigate(["dashboard"], {skipLocationChange: true})
+          this.router.navigate(["blank"], {queryParams: {redirect:"dashboard"}});
+        } else if (result === false) {
+          this.message = "Something wrong! try again";
         }
       });
   };
@@ -125,7 +131,8 @@ export class LoginDialogComponentDialog {
       }, (response: Response) => {
         console.log(":err");
         console.log(response);
-          this.dialogRef.close(false);
+        window.alert(JSON.stringify(response));
+        this.dialogRef.close(false);
       })
   }
 

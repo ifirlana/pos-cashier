@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {LaraService} from "../service/laravel/lara.service";
 import {SidebarModel} from "../service/laravel/sidebar.model";
+import 'rxjs/add/operator/retry';
 
 
 @Component({
@@ -18,15 +19,18 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadSidebar()
+    this.loadSidebar();
   }
 
   // load sidebar menu
   loadSidebar() {
     return this.laraService.getSidebar()
+      .retry(2)
       .subscribe((response: SidebarModel) => {
         console.log(":response ", response);
         this.sidebars = response;
+      }, (response: Response) => {
+        console.error(":err ", response);
       });
   }
 

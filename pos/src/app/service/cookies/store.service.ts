@@ -27,7 +27,11 @@ export class StoreService {
     return Observable.create((observer) => {
       this.cookieService.set( this.AuthLaraKey, Token);
       this.cookieValue = this.cookieService.get(this.AuthLaraKey);
-      observer.next(true);
+      if (this.cookieValue == Token) {
+        observer.next(true);
+      } else {
+        observer.error("Token not stored!");
+      }
     })
   }
 

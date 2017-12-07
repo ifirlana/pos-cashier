@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {LaraService} from "../service/laravel/lara.service";
+import {SidebarModel} from "../service/laravel/sidebar.model";
 
-import { WpService } from '../service/wp/wp.service';
-import { WpModel } from '../service/wp/wp.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,22 +11,23 @@ import { WpModel } from '../service/wp/wp.model';
 })
 export class DashboardComponent implements OnInit {
 
-  sidebar: WpModel[];
+  sidebars: SidebarModel;
 
-  constructor(private wp: WpService) { }
+  constructor(
+    private laraService : LaraService,
+  ) { }
 
   ngOnInit() {
-    this.loadWp()
+    this.loadSidebar()
   }
 
   // load sidebar menu
-  loadWp() {
-    this.wp.getSidebar()
-      .subscribe(
-        (isian: any) => {
-          console.log("wp:", isian);
-          this.sidebar = isian;
-        });
+  loadSidebar() {
+    return this.laraService.getSidebar()
+      .subscribe((response: SidebarModel) => {
+        console.log(":response ", response);
+        this.sidebars = response;
+      });
   }
 
 }

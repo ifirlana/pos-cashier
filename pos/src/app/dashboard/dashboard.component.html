@@ -5,8 +5,8 @@
 
   <mat-toolbar-row>
     <span><a class="sidebar-subtitle" id="home" routerLink="/dashboard/" routerLinkActive="active">Home</a>&nbsp;</span>
-    <span  *ngFor="let side of sidebar">
-      <span><a class="sidebar-subtitle" id="{{side.id}}" routerLink="/dashboard/{{side.slug}}">{{side.title.rendered}}</a>&nbsp;</span>
+    <span  *ngFor="let sidebar of sidebars">
+      <span><a class="sidebar-subtitle" id="{{sidebar.id}}" routerLink="/dashboard/{{sidebar.url}}">{{sidebar.name}}</a>&nbsp;</span>
     </span>
     <span><a class="sidebar-subtitle" id="logout" routerLink="/logout" routerLinkActive="active">logout</a>&nbsp;</span>
   </mat-toolbar-row>

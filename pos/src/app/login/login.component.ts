@@ -4,6 +4,7 @@ import { StoreService } from '../service/cookies/store.service';
 import {Route, Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 import {LaraService} from "../service/laravel/lara.service";
+import {TokenModel} from "../service/laravel/token.model";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,10 @@ import {LaraService} from "../service/laravel/lara.service";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -24,6 +28,10 @@ export class LoginComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         console.log('The dialog was closed');
+        console.log(result);
+        if (result === true) {
+          this.router.navigate(["dashboard"], {skipLocationChange: true})
+        }
       });
   }
 
@@ -33,6 +41,10 @@ export class LoginComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         console.log('The dialog was closed');
+        console.log(result);
+        if (result === true) {
+          this.router.navigate(["dashboard"], {skipLocationChange: true})
+        }
       });
   };
 
@@ -53,7 +65,6 @@ export class LoginComponentDialog {
   constructor(
     public dialogRef: MatDialogRef<LoginComponentDialog>,
     private store: StoreService,
-    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
@@ -65,9 +76,12 @@ export class LoginComponentDialog {
       this.store.onSave(btoa(this.username+":"+this.password))
       .subscribe(() => {
         console.log(":store:Success!");
-        this.dialogRef.close();
-        this.router.navigate(["dashboard"], {skipLocationChange: true})
-      })
+        this.dialogRef.close(true);
+      }, (response: Response) => {
+        console.log(":err");
+        console.log(response);
+        this.dialogRef.close(false);
+      });
   }
 
 }
@@ -85,10 +99,10 @@ export class LoginDialogComponentDialog {
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponentDialog>,
-    private store: StoreService,
-    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private laraService: LaraService,
+    private store: StoreService,
+
   ) {
     this.title = "Laravel login";
     this.username = "test@gmail.com";
@@ -101,10 +115,17 @@ export class LoginDialogComponentDialog {
 
   OK(): void {
     this.laraService.createToken(this.username, this.password)
-      .subscribe((response: Response) => {
+      .subscribe((responseToken: TokenModel) => {
         console.log(":token");
+        console.log(responseToken);
+          this.store.onLaraSave(responseToken.token_type+" "+responseToken.access_token)
+            .subscribe(() => {
+              this.dialogRef.close(true)
+            });
+      }, (response: Response) => {
+        console.log(":err");
         console.log(response);
-        this.dialogRef.close();
+          this.dialogRef.close(false);
       })
   }
 

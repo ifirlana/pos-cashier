@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   // load sidebar menu
   loadSidebar() {
     return this.laraService.getSidebar()
-      .retry(2)
+      .retry(1)
       .subscribe((response: SidebarModel) => {
         console.log(":response ", response);
         this.sidebars = response;

@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit, ViewEncapsulation, SecurityContext} from '@angular/core';
-import {WpModel} from "../service/wp/wp.model";
-import {WpService} from "../service/wp/wp.service";
+// import {WpModel} from "../service/wp/wp.model";
+// import {WpService} from "../service/wp/wp.service";
+import { LaraService } from "../service/laravel/lara.service";
+import { ChairsModel } from "../service/laravel/chairs.model";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import {StoreService} from "../service/cookies/store.service";
 import {Router} from "@angular/router";
@@ -15,26 +17,26 @@ import {CommonComponentConfirmDialog} from "../common/common.component";
 })
 export class ChairsComponent implements OnInit {
 
-  chairs: WpModel[];
+  chairs: ChairsModel[];
   message = false;
 
   constructor(
-    private wp: WpService,
+    private lara: LaraService,
     private dialog: MatDialog,
     private router: Router,
   ) { }
 
   ngOnInit() {
-    this.wp.getChairs()
+    this.lara.getChairs()
       .subscribe((chairs) => {
-        console.log(":wp ", chairs);
+        console.log(":chairs ", chairs);
         this.chairs = chairs;
       });
   }
 
   openDialog(this_var: string): void {
     this.message = true;
-    this.wp.getChair(this_var)
+    this.lara.getChair(this_var)
       .subscribe((data) => {
         let dialogRef = this.dialog.open(ChairsComponentDialog,
           {
@@ -54,7 +56,7 @@ export class ChairsComponent implements OnInit {
 
   openEditDialog(this_var: string): void {
     this.message = true;
-    this.wp.getChair(this_var)
+    this.lara.getChair(this_var)
       .subscribe((data) => {
         let dialogRef = this.dialog.open(ChairsComponentEditDialog,
           {
@@ -101,7 +103,7 @@ export class ChairsComponent implements OnInit {
 })
 export class ChairsComponentDialog {
 
-  chair: WpModel;
+  chair: ChairsModel;
   rendered: any;
 
   constructor(
@@ -111,7 +113,7 @@ export class ChairsComponentDialog {
   ) {
     console.log(":data ",data);
     this.chair = data;
-    this.chair.content.rendered = this._sanitizer.sanitize(SecurityContext.HTML, this.chair.content.rendered);
+    // this.chair.content.rendered = this._sanitizer.sanitize(SecurityContext.HTML, this.chair.content.rendered);
 
   }
 
@@ -129,13 +131,12 @@ export class ChairsComponentDialog {
 })
 export class ChairsComponentAddDialog {
 
-  title = "";
-  content = "";
+  code = "";
   message: string;
 
   constructor(
     public dialogRef: MatDialogRef<ChairsComponentAddDialog>,
-    private wp: WpService,
+    private lara: LaraService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     console.log(":data ",data);
 
@@ -147,7 +148,7 @@ export class ChairsComponentAddDialog {
 
   Save():void {
     this.message = "Please wait...";
-    this.wp.postChair({title: this.title, content: this.content})
+    this.lara.postChair({code: this.code})
       .subscribe((result) => {
         console.log(":result", result);
         this.message = "DONE!";
@@ -164,14 +165,14 @@ export class ChairsComponentAddDialog {
 })
 export class ChairsComponentEditDialog {
 
-  chair: WpModel;
+  chair: ChairsModel;
   id: string;
   message: string;
 
   constructor(
     public dialogRef: MatDialogRef<ChairsComponentEditDialog>,
     private dialog: MatDialog,
-    private wp: WpService,
+    private lara: LaraService,
     private _sanitizer: DomSanitizer,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
@@ -185,14 +186,13 @@ export class ChairsComponentEditDialog {
   }
 
   onUpdate(): void {
-    this.wp.updateChair({
-      'title': this.chair.title.rendered,
-      'content': this.chair.content.rendered,
-    }, this.id)
+    console.log(this.chair);
+    this.lara.updateChair(this.chair, this.id)
       .subscribe(() => {
         this.dialogRef.close(true);
       })
   }
+
   onDelete(): void {
     let dialog_confirm = this.dialog.open(CommonComponentConfirmDialog);
 
@@ -200,10 +200,11 @@ export class ChairsComponentEditDialog {
       .subscribe((result: boolean) => {
         console.log('The dialog was closed ', result);
         if (result === true) {
-          this.wp.deleteChair(this.id)
-            .subscribe(() => {
-              this.dialogRef.close(true);
-            })
+          // this.wp.deleteChair(this.id)
+          //   .subscribe(() => {
+
+          //     this.dialogRef.close(true);
+          //   })
         } else {
           this.dialogRef.close(false);
         }

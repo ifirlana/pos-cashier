@@ -2,12 +2,8 @@
 <form class="example-form">
   <div *ngIf="message" style="color: red;">{{message}}</div>
   <mat-form-field class="example-full-width">
-    <input matInput [(ngModel)]="chair.title.rendered" [ngModelOptions]="{standalone: true}"  placeholder="Name">
+    <input matInput [(ngModel)]="chair.code" [ngModelOptions]="{standalone: true}"  placeholder="Name">
   </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <input matInput [(ngModel)]="chair.content.rendered" [ngModelOptions]="{standalone: true}"  placeholder="Description">
-  </mat-form-field>
-
   <button mat-raised-button color="primary" (click)="onUpdate()">Update</button>
   <button mat-button color="warn" (click)="onDelete()">Delete</button>
 </form>

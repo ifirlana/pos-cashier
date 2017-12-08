@@ -2,11 +2,7 @@
 <form class="example-form">
   <div *ngIf="message" style="color: red;">{{message}}</div>
   <mat-form-field class="example-full-width">
-    <input matInput [(ngModel)]="title" [ngModelOptions]="{standalone: true}"  placeholder="Name">
+    <input matInput [(ngModel)]="code" [ngModelOptions]="{standalone: true}"  placeholder="Name">
   </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <input matInput [(ngModel)]="content" [ngModelOptions]="{standalone: true}"  placeholder="Description">
-  </mat-form-field>
-
   <button mat-raised-button color="primary" (click)="Save()">Save</button>
 </form>

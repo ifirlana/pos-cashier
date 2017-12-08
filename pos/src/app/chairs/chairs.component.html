@@ -9,7 +9,7 @@
   <div *ngFor="let chair of chairs">
     <mat-card>
       <mat-card-content>
-        {{chair.title.rendered}}
+        {{chair.code}}
       </mat-card-content>
       <mat-card-actions>
         <button mat-button color="default" (click)="openDialog(chair.id)">View</button>

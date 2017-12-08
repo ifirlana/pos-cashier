@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {StoreService} from "../cookies/store.service";
 import {SidebarModel} from "./sidebar.model";
 import {HttpObserve} from "@angular/common/http/src/client";
+import {ChairsModel} from "./chairs.model";
 
 @Injectable()
 export class LaraService {
@@ -12,6 +13,8 @@ export class LaraService {
   lara:string;
   oauth_token: string;
   sidebar: string;
+  chairs:string;
+  chairs_show:string;
 
   headers: HttpHeaders;
 
@@ -23,6 +26,7 @@ export class LaraService {
     this.lara = env.environment.lara_url;
     this.oauth_token = this.lara+"/oauth/token/";
     this.sidebar = this.lara + "/api/sidebar/";
+    this.chairs = this.lara + "/api/chairs/";
 
   }
 
@@ -49,6 +53,35 @@ export class LaraService {
 
     return this.http.get<SidebarModel>(this.sidebar, {
       headers: this.loadHeader()
+    })
+  }
+
+  // chairs components service
+  // return chairs
+  getChairs(): Observable<any> {
+    return this.http.get<ChairsModel>(this.chairs, {
+      headers: this.loadHeader()
+    })
+  }
+
+  // return single chair
+  getChair(id: string): Observable<any> {
+    return this.http.get<ChairsModel>(this.chairs+id, {
+      headers: this.loadHeader()
+    })
+  }
+
+  // create new
+  postChair(data: object): Observable<any> {
+    return this.http.post(this.chairs, data, {
+      headers: this.loadHeader(),
+    });
+  }
+
+  // update
+  updateChair(data: object, id: string): Observable<any> {
+    return this.http.patch(this.chairs+id, data, {
+      headers: this.loadHeader(),
     })
   }
 }

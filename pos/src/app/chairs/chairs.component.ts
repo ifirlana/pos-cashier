@@ -94,6 +94,10 @@ export class ChairsComponent implements OnInit {
         }
       });
   }
+
+  openOrder(id: string): void {
+    this.router.navigateByUrl("dashboard/products/"+id);
+  }
 }
 
 @Component({

@@ -32,6 +32,7 @@ import { LoginComponent, LoginComponentDialog, LoginDialogComponentDialog } from
 import { ChairsComponent, ChairsComponentDialog, ChairsComponentAddDialog, ChairsComponentEditDialog } from './chairs/chairs.component';
 import { RedirectBlankComponent } from './redirect-blank/redirect-blank.component';
 import { CommonComponent, CommonComponentConfirmDialog } from './common/common.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { CommonComponent, CommonComponentConfirmDialog } from './common/common.c
     RedirectBlankComponent,
     CommonComponent,
     CommonComponentConfirmDialog,
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,

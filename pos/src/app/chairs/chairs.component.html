@@ -12,6 +12,7 @@
         {{chair.code}}
       </mat-card-content>
       <mat-card-actions>
+        <button mat-button color="default" (click)="openOrder(chair.id)">Orders</button>
         <button mat-button color="default" (click)="openDialog(chair.id)">View</button>
         <button mat-button color="warn" (click)="openEditDialog(chair.id)">Edit</button>
       </mat-card-actions>

@@ -6,6 +6,7 @@ import {StoreService} from "../cookies/store.service";
 import {SidebarModel} from "./sidebar.model";
 import {HttpObserve} from "@angular/common/http/src/client";
 import {ChairsModel} from "./chairs.model";
+import {ProductsModel} from "./products.model";
 
 @Injectable()
 export class LaraService {
@@ -14,7 +15,7 @@ export class LaraService {
   oauth_token: string;
   sidebar: string;
   chairs:string;
-  chairs_show:string;
+  products:string;
 
   headers: HttpHeaders;
 
@@ -27,6 +28,7 @@ export class LaraService {
     this.oauth_token = this.lara+"/oauth/token/";
     this.sidebar = this.lara + "/api/sidebar/";
     this.chairs = this.lara + "/api/chairs/";
+    this.products = this.lara + "/api/products/";
 
   }
 
@@ -88,6 +90,42 @@ export class LaraService {
   // delete
   deleteChair(id: string): Observable<any> {
     return this.http.delete(this.chairs+id, {
+      headers: this.loadHeader(),
+    })
+  }
+
+  // products components service
+  // return chairs
+  getProducts(): Observable<any> {
+    return this.http.get<ProductsModel>(this.products, {
+      headers: this.loadHeader()
+    })
+  }
+
+  // return single chair
+  getProduct(id: string): Observable<any> {
+    return this.http.get<ProductsModel>(this.products+id, {
+      headers: this.loadHeader()
+    })
+  }
+
+  // create new
+  postProduct(data: object): Observable<any> {
+    return this.http.post(this.products, data, {
+      headers: this.loadHeader(),
+    });
+  }
+
+  // update
+  updateProduct(data: object, id: string): Observable<any> {
+    return this.http.patch(this.products+id, data, {
+      headers: this.loadHeader(),
+    })
+  }
+
+  // delete
+  deleteProduct(id: string): Observable<any> {
+    return this.http.delete(this.products+id, {
       headers: this.loadHeader(),
     })
   }

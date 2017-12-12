@@ -84,4 +84,11 @@ export class LaraService {
       headers: this.loadHeader(),
     })
   }
+
+  // delete
+  deleteChair(id: string): Observable<any> {
+    return this.http.delete(this.chairs+id, {
+      headers: this.loadHeader(),
+    })
+  }
 }

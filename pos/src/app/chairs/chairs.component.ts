@@ -200,11 +200,14 @@ export class ChairsComponentEditDialog {
       .subscribe((result: boolean) => {
         console.log('The dialog was closed ', result);
         if (result === true) {
-          // this.wp.deleteChair(this.id)
-          //   .subscribe(() => {
+          this.lara.deleteChair(this.id)
+            .subscribe(() => {
 
-          //     this.dialogRef.close(true);
-          //   })
+              this.dialogRef.close(true);
+            }, (response: Response) => {
+              console.error("response: ",response);
+              this.dialogRef.close(false);
+            })
         } else {
           this.dialogRef.close(false);
         }

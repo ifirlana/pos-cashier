@@ -16,6 +16,7 @@ export class LaraService {
   sidebar: string;
   chairs:string;
   products:string;
+  orders:string;
 
   headers: HttpHeaders;
 
@@ -29,6 +30,7 @@ export class LaraService {
     this.sidebar = this.lara + "/api/sidebar/";
     this.chairs = this.lara + "/api/chairs/";
     this.products = this.lara + "/api/products/";
+    this.orders = this.lara + "/api/orders/";
 
   }
 
@@ -110,8 +112,8 @@ export class LaraService {
   }
 
   // create new
-  postProduct(data: object): Observable<any> {
-    return this.http.post(this.products, data, {
+  postOrder(data: object): Observable<any> {
+    return this.http.post(this.orders, data, {
       headers: this.loadHeader(),
     });
   }

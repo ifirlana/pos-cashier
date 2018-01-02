@@ -4,3 +4,20 @@
 <p>
   Sub:
 </p>
+<div *ngIf="products">
+  <div *ngFor="let product of products">
+    <mat-card>
+      <mat-card-content>
+        <mat-checkbox>{{product.name}}</mat-checkbox>
+      </mat-card-content>
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+    <br>
+  </div>
+</div>
+<div *ngIf="!products">
+  <h2>Loading..</h2>
+</div>
+
+<button mat-button color="default" (click)="onProductClick()">click disini</button>

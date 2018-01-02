@@ -13,6 +13,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 //Service
@@ -68,6 +69,7 @@ import { ProductsComponent } from './products/products.component';
     FormsModule,
     ReactiveFormsModule,
     MatGridListModule,
+    MatCheckboxModule,
   ],
   entryComponents: [
     LoginComponentDialog,
